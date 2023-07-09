@@ -30,22 +30,6 @@ public class MasterService {
                 outputChannel.send(MessageBuilder.fromMessage(stringMessage).setHeader("slave", "slave2").build());
             }
         }
-        synchronized (processedStrings) {
-            try {
-                processedStrings.wait();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
-        processedStrings.toArray(new String[0]);
-    }
-
-    public void processResult(String result) {
-        synchronized (processedStrings) {
-            processedStrings.add(result);
-            if (processedStrings.size() == 2) {
-                processedStrings.notify();
-            }
-        }
     }
 }
+
