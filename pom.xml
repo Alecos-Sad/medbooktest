@@ -16,4 +16,10 @@
     <properties>
         <java.version>11</java.version>
     </properties>
+    <packaging>pom</packaging>
+    <modules>
+        <module>master</module>
+        <module>slave1</module>
+        <module>slave2</module>
+    </modules>
    </project>
