@@ -1,18 +1,15 @@
 package by.sadovnick.slave1.processor;
 
-import org.springframework.integration.handler.GenericHandler;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHeaders;
+import org.springframework.integration.annotation.MessageEndpoint;
+import org.springframework.integration.annotation.ServiceActivator;
 
-public class Slave1Processor implements GenericHandler<Message<String>> {
+@MessageEndpoint
+public class Slave1Processor {
 
-    @Override
-    public Object handle(Message<String> message, MessageHeaders headers) {
-        return reverseString(message.getPayload());
+    @ServiceActivator(inputChannel = "slave1InputChannel", outputChannel = "slave1OutputChannel")
+    public String process(String input) {
+        return input.toUpperCase();
     }
 
-    private String reverseString(String input) {
-        return new StringBuilder(input).reverse().toString();
-    }
 }
 
